@@ -16,7 +16,7 @@
 
                 $(self.postsList).each(function (index, _item) {
 
-                    if(!(/^http:\/\//.test(_item.imageUrl))) {
+                    if(!(/^(http:\/\/|https:\/\/)/.test(_item.imageUrl))) {
                         _item.imageUrl = appConfig.apiHost + "/" + _item.imageUrl;
                     }
 
