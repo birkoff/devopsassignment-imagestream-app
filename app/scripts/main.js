@@ -10,14 +10,14 @@
             console.log('rendering: ' + url);
 
             $.get(url, function (data) {
-                console.log("requested post");
+                console.log('requested post');
                 self.postsList = data['posts'];
                 var html = [];
 
                 $(self.postsList).each(function (index, _item) {
 
                     if(!(/^(http:\/\/|https:\/\/)/.test(_item.imageUrl))) {
-                        _item.imageUrl = appConfig.apiHost + "/" + _item.imageUrl;
+                        _item.imageUrl = appConfig.apiHost + '/' + _item.imageUrl;
                     }
 
                     html.push('<tr><td>' + _item.title + '<br/>');
@@ -29,7 +29,7 @@
                 $('.post-list').html(html);
             });
 
-            console.log("init");
+            console.log('init');
 
         },
 
@@ -49,27 +49,27 @@
                 $('#postcount').replaceWith(html);
             });
 
-            var viewsUrl =  appConfig.apiHost +  '/api/posts/views';
-
-            $.get(viewsUrl, function (data) {
-                var html = [];
-                $(data).each(function (index, _item) {
-                    console.log(_item);
-                    html.push('<li id="views" class="active"><a href="#">Views: ' + _item.views + '</a></li>');
-                });
-                html = html.join('');
-                console.log(html);
-                $('#views').replaceWith(html);
-            });
+            // var viewsUrl =  appConfig.apiHost +  '/api/posts/views';
+            //
+            // $.get(viewsUrl, function (data) {
+            //     var html = [];
+            //     $(data).each(function (index, _item) {
+            //         console.log(_item);
+            //         html.push('<li id="views" class="active"><a href="#">Views: ' + _item.views + '</a></li>');
+            //     });
+            //     html = html.join('');
+            //     console.log(html);
+            //     $('#views').replaceWith(html);
+            // });
         },
 
         binding_actions: function() {
-            $("#uploadimage").on('submit',(function(e) {
+            $('#uploadimage').on('submit',(function(e) {
                 var actionUrl = appConfig.apiHost + '/api/post/create';
                 console.log(actionUrl);
-                $("#uploadimage").attr('action', actionUrl);
+                $('#uploadimage').attr('action', actionUrl);
 
-                console.log("starting");
+                console.log('starting');
             }));
         },
 
@@ -78,10 +78,10 @@
             this.render_posts();
             this.binding_actions();
 
-            // var self = this;
-            // setInterval(function () {
-            //     self.reload();
-            // }, 15000);
+            var self = this;
+            setInterval(function () {
+                self.reload();
+            }, 15000);
         }
     };
 
